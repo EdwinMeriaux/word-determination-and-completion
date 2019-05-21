@@ -2,8 +2,6 @@
 #nltk not being used yet
 #probably won't be used for a while
 
-#the left and right arrows still work even after another letter was clicked
-
 #these files are the necessary imports
 import pynput
 import random
@@ -151,8 +149,7 @@ def on_press(key): #everything that happens after a key was pressed
             if key == keyboard.KeyCode.from_char(a):
                 previouskey = key
             previousvariable = variable1 #resets previousvariable
-    
-    
+    print(enter)
     
 def on_release(key): #everythin that happens once a key was released
     global enter
@@ -182,6 +179,7 @@ def on_release(key): #everythin that happens once a key was released
                 print('accomplished')
             else:
                 print('moving on...')
+                enter = 'nope'
 
         elif previouskey == -1:
             print('there is nothing to be done so far')
