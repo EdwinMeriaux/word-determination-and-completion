@@ -1,7 +1,3 @@
-#import nltk
-#nltk not being used yet
-#probably won't be used for a while
-
 #these files are the necessary imports
 import pynput
 import random
