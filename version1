@@ -14,6 +14,7 @@ previouskey = -1 #remembers what the previous key that was presssed
 previousvariable = 0 #previous number of the letter in the alphabet
 enter = 0 #will be used to recognize when the most probable letter will be used
 ordermaxmin2 = 0 #this variable is to be used to say which one in the order of the maxmin2 list
+shift = 1 #this variable is for starting and ending autofil
 
 #error in the code is that they are all pasting into the letters0 (possibly fixed with the many diferent leters00)
 letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -87,7 +88,6 @@ def most_used():
                 y = y + 1
             else:
                 print('error')
-        #print(x1)
         maxmin2.append(order2[x])
         order2.pop(x)
         
@@ -149,9 +149,9 @@ def on_press(key): #everything that happens after a key was pressed
             if key == keyboard.KeyCode.from_char(a):
                 previouskey = key
             previousvariable = variable1 #resets previousvariable
-    print(enter)
     
 def on_release(key): #everythin that happens once a key was released
+    global shift
     global enter
     global answer
     answer = 0
@@ -172,14 +172,17 @@ def on_release(key): #everythin that happens once a key was released
         if key == Key.shift:
             enter = "was pressed"
         if previouskey != -1:
-            word = int(input('1/0 (Y/N) do you want autofil?'))
-            if word == 1:
+            if shift == 1:
                 print('starting')
                 generated_letter()
                 print('accomplished')
-            else:
+                shift = 0
+            elif shift == 0:
                 print('moving on...')
                 enter = 'nope'
+                shift = 1
+            else:
+                print('shift error')
 
         elif previouskey == -1:
             print('there is nothing to be done so far')
