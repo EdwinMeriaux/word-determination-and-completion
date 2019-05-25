@@ -2,6 +2,10 @@
 #nltk not being used yet
 #probably won't be used for a while
 
+#error
+#clicking right does not go through the first letter again
+#all of the left right is inoperable in general
+
 #these files are the necessary imports
 import pynput
 import random
@@ -15,6 +19,9 @@ previousvariable = 0 #previous number of the letter in the alphabet
 enter = 0 #will be used to recognize when the most probable letter will be used
 ordermaxmin2 = 0 #this variable is to be used to say which one in the order of the maxmin2 list
 shift = 1 #this variable is for starting and ending autofil
+rightleft = 0
+leftright = 0
+
 
 #error in the code is that they are all pasting into the letters0 (possibly fixed with the many diferent leters00)
 letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -56,14 +63,39 @@ maxmin2 = []
 order2 = []
 
 def right():
+    global rightleft
     global ordermaxmin2
-    ordermaxmin2 = ordermaxmin2 + 1
-    letter()
+    if rightleft != '1':
+        if ordermaxmin2 + 1 > 25:
+            ordermaxmin2 = 0
+        else:
+            ordermaxmin2 = ordermaxmin2 + 1
+        keyboard = Controller()
+        #keyboard.press(Key.left)
+        keyboard.press(Key.backspace)
+        letter()
+    else:
+        rightleft = 1
+    
 
 def left():
     global ordermaxmin2
-    ordermaxmin2 = ordermaxmin2 - 1
-    letter()
+    global leftright
+    global rightleft
+    if leftright%2 != 0:
+        if ordermaxmin2 - 1 < 0:
+            ordermaxmin2 = 25
+        else:
+            ordermaxmin2 = ordermaxmin2 - 1
+        keyboard = Controller()
+        rightleft = '1'
+        keyboard.press(Key.right)
+        rightleft = '1'
+        keyboard.press(Key.right)
+        keyboard.press(Key.backspace)
+        letter()
+    else:
+        pass
 
 def most_used():
     global previousvariable
@@ -122,16 +154,20 @@ def on_press(key): #everything that happens after a key was pressed
     global variable1
     global previouskey
     global previousvariable
+    global rightleft
+    global leftright
     variable1 = 0
     variable = -1
+    
 
 #code
-#this part is for use when after shift has been pressed meaning that the user want a generated letter this will eventually give that letter
-    #TBF
+#this part is for use when after shift has been pressed meaning that the user want a generateb defghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmn1
     if enter == "was pressed":
         if key == Key.right:
+            #rightleft = rightleft + 1
             right()
         if key == Key.left:
+            leftright = leftright + 1
             left()
     
 #this uses the pressed key and prints it out
