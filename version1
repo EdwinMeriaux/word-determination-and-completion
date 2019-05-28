@@ -65,7 +65,9 @@ order2 = []
 def right():
     global rightleft
     global ordermaxmin2
-    if rightleft != '1':
+    if rightleft == '1':
+        print('1')
+    else:
         if ordermaxmin2 + 1 > 25:
             ordermaxmin2 = 0
         else:
@@ -74,15 +76,13 @@ def right():
         #keyboard.press(Key.left)
         keyboard.press(Key.backspace)
         letter()
-    else:
-        rightleft = 1
     
 
 def left():
     global ordermaxmin2
     global leftright
     global rightleft
-    if leftright%2 != 0:
+    if True:
         if ordermaxmin2 - 1 < 0:
             ordermaxmin2 = 25
         else:
@@ -90,12 +90,10 @@ def left():
         keyboard = Controller()
         rightleft = '1'
         keyboard.press(Key.right)
-        rightleft = '1'
         keyboard.press(Key.right)
         keyboard.press(Key.backspace)
         letter()
-    else:
-        pass
+
 
 def most_used():
     global previousvariable
@@ -167,7 +165,7 @@ def on_press(key): #everything that happens after a key was pressed
             #rightleft = rightleft + 1
             right()
         if key == Key.left:
-            leftright = leftright + 1
+            #leftright = leftright + 1
             left()
     
 #this uses the pressed key and prints it out
@@ -190,6 +188,8 @@ def on_release(key): #everythin that happens once a key was released
     global shift
     global enter
     global answer
+    global rightleft
+    rightleft = 0
     answer = 0
     if key == Key.esc: #termination sequence and presentation of data
         number_of_letters()
