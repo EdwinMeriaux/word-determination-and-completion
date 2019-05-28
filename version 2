@@ -48,9 +48,12 @@ maxmin2 = []
 order2 = []
    
 def on_press(key): #everything that happens after a key was pressed
+
     print("{0} pressed".format(key))
+    
+def on_release(key): #everythin that happens once a key was released
     if key == Key.esc: #termination sequence and presentation of data
         return False
-      
+
 with Listener(on_press = on_press, on_release = on_release) as listener:
     listener.join()
