@@ -5,54 +5,75 @@ from pynput import keyboard
 from pynput.keyboard import Key, Listener, Controller
 
 #setting up key variables
+variable = 0
 
-
-
-#error in the code is that they are all pasting into the letters0 (possibly fixed with the many diferent leters00)
+#lits used
 letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-
-letters00 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters01 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters02 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters03 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters04 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters05 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters06 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters07 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters08 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters09 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters10 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters11 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters12 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters13 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters14 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters15 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters16 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters17 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters18 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters19 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters20 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters21 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters22 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters23 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters24 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters25 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-
-
-letters1 = [['a',0],['b',0],['c',0],['d',0],['e',0],['f',0],['g',0],['h',0],['i',0],['j',0],['k',0],['l',0],['m',0],['n',0],['o',0],['p',0],['q',0],['r',0],['s',0],['t',0],['u',0],['v',0],['w',0],['x',0],['y',0],['z',0]]
-letters2 = [['a',letters00],['b',letters01],['c',letters02],['d',letters03],['e',letters04],['f',letters05],['g',letters06],['h',letters07],['i',letters08],['j',letters09],['k',letters10],['l',letters11],['m',letters12],['n',letters13],['o',letters14],['p',letters15],['q',letters16],['r',letters17],['s',letters18],['t',letters19],['u',letters20],['v',letters21],['w',letters22],['x',letters23],['y',letters24],['z',letters25]]
-
+word = []
+word_number = []
+clearlist = []
 order = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-maxmin = []
-maxmin2 = []
-order2 = []
+
+letterwordsa = []
+letterwordsb = []
+letterwordsc = []
+letterwordsd = []
+letterwordse = []
+letterwordsf = []
+letterwordsg = []
+letterwordsh = []
+letterwordsi = []
+letterwordsj = []
+letterwordsk = []
+letterwordsl = []
+letterwordsm = []
+letterwordsn = []
+letterwordso = []
+letterwordsp = []
+letterwordsq = []
+letterwordsr = []
+letterwordss = []
+letterwordst = []
+letterwordsu = []
+letterwordsv = []
+letterwordsw = []
+letterwordsx = []
+letterwordsy = []
+letterwordsz = []
+
+letterwords = [['a',0,letterwordsa],['b',0,letterwordsb],['c',0,letterwordsc],['d',0,letterwordsd],['e',0,letterwordse],['f',0,letterwordsf],['g',0,letterwordsg],['h',0,letterwordsh],['i',0,letterwordsi],['j',0,letterwordsj],['k',0,letterwordsk],['l',0,letterwordsl],['m',0,letterwordsm],['n',0,letterwordsn],['o',0,letterwordso],['p',0,letterwordsp],['q',0,letterwordsq],['r',0,letterwordsr],['s',0,letterwordss],['t',0,letterwordst],['u',0,letterwordsu],['v',0,letterwordsv],['w',0,letterwordsw],['x',0,letterwordsy],['y',0,letterwordsy],['z',0,letterwordsz],]
+
+def termination():
+    for i in order:
+        print(letterwords[i][0],letterwords[i][1])
+
+def word_appender(i,variable):
+    global word
+    global word_number
+    word.append(i)
+    word_number.append(variable)
+    print(i)
+    print(variable)
+
+def word_clear():
+    global word
+    global word_number
+    if len(word) != 0:
+        letterwords[word_number[0]][1] = letterwords[word_number[0]][1] + 1
+        word = []
+        word_number = []
+        print('clear')
 
 def letter(key):
+    global variable
+    variable = 0
     for i in letters:
         if key == keyboard.KeyCode.from_char(i):
             print(i)
+            word_appender(i,variable)
         if key == Key.space:
-            print('space')
+            word_clear()
+        variable = variable + 1
 
 def on_press(key): #everything that happens after a key was pressed
     print("{0} pressed".format(key))
@@ -60,6 +81,7 @@ def on_press(key): #everything that happens after a key was pressed
     
 def on_release(key): #everythin that happens once a key was released
     if key == Key.esc: #termination sequence and presentation of data
+        termination()
         return False
 
 with Listener(on_press = on_press, on_release = on_release) as listener:
