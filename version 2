@@ -46,10 +46,17 @@ order = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
 maxmin = []
 maxmin2 = []
 order2 = []
-   
-def on_press(key): #everything that happens after a key was pressed
 
+def letter(key):
+    for i in letters:
+        if key == keyboard.KeyCode.from_char(i):
+            print(i)
+        if key == Key.space:
+            print('space')
+
+def on_press(key): #everything that happens after a key was pressed
     print("{0} pressed".format(key))
+    letter(key)
     
 def on_release(key): #everythin that happens once a key was released
     if key == Key.esc: #termination sequence and presentation of data
