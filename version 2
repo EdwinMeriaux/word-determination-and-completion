@@ -6,6 +6,7 @@ from pynput.keyboard import Key, Listener, Controller
 
 #setting up key variables
 variable = 0
+yesno = 0
 
 #lits used
 letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -41,7 +42,24 @@ letterwordsx = []
 letterwordsy = []
 letterwordsz = []
 
-letterwords = [['a',0,letterwordsa],['b',0,letterwordsb],['c',0,letterwordsc],['d',0,letterwordsd],['e',0,letterwordse],['f',0,letterwordsf],['g',0,letterwordsg],['h',0,letterwordsh],['i',0,letterwordsi],['j',0,letterwordsj],['k',0,letterwordsk],['l',0,letterwordsl],['m',0,letterwordsm],['n',0,letterwordsn],['o',0,letterwordso],['p',0,letterwordsp],['q',0,letterwordsq],['r',0,letterwordsr],['s',0,letterwordss],['t',0,letterwordst],['u',0,letterwordsu],['v',0,letterwordsv],['w',0,letterwordsw],['x',0,letterwordsy],['y',0,letterwordsy],['z',0,letterwordsz],]
+letterwords = [['a',0,letterwordsa],['b',0,letterwordsb],['c',0,letterwordsc],['d',0,letterwordsd],['e',0,letterwordse],['f',0,letterwordsf],['g',0,letterwordsg],['h',0,letterwordsh],['i',0,letterwordsi],['j',0,letterwordsj],['k',0,letterwordsk],['l',0,letterwordsl],['m',0,letterwordsm],['n',0,letterwordsn],['o',0,letterwordso],['p',0,letterwordsp],['q',0,letterwordsq],['r',0,letterwordsr],['s',0,letterwordss],['t',0,letterwordst],['u',0,letterwordsu],['v',0,letterwordsv],['w',0,letterwordsw],['x',0,letterwordsy],['y',0,letterwordsy],['z',0,letterwordsz]]
+
+def word_print():
+    for i in order:
+        print(letterwords[i][2])
+
+def word_insertion(word,word_number):
+    global yesno
+    for i in letterwords[word_number[0]][2]:
+        if word == i:
+            yesno = yesno + 1
+        else:
+            yesno = yesno
+    print(yesno)
+    if yesno == 1:
+        pass
+    else:
+        letterwords[word_number[0]][2].append(word)
 
 def termination():
     for i in order:
@@ -59,6 +77,8 @@ def word_clear():
     global word
     global word_number
     if len(word) != 0:
+        word_insertion(word,word_number)
+        word_print()
         letterwords[word_number[0]][1] = letterwords[word_number[0]][1] + 1
         word = []
         word_number = []
