@@ -48,30 +48,46 @@ letterwords = [['a',0,letterwordsa],['b',0,letterwordsb],['c',0,letterwordsc],['
 def sort_rest(word_number):
     global ticker
     global b
+    global x
+    global y
+    global list3
+    global list4
+    global alpha
+    global base
     ticker = 0
     ticker2 = 0
     ticker3 = 0
     list3 = []
     for i in letterwords[word_number[0]][2]:
+        print(len(i))
+        print(i)
+        print(word_number)
         ticker2 = ticker2 + 1
         if len(i) > 4:
-            if i[6] == word_number[3]:
-                list3.append(i)
-                ticker = ticker + 1
-                if ticker3 == 0:
-                    ticker3 = ticker2 - 1
+            list3.append(i)
+            ticker = ticker + 1
+            print('ticker',ticker)
+            if ticker3 == 0:
+                ticker3 = ticker2 - 1
+                print('ticker3',ticker3)
+    print('list3')
     print(list3)
     list4 = []
     base = len(list3)
     while len(list4)<base:
+        print('a')
         alpha = len(list3) - 1
         while alpha > 0:
+            print('b')
             y = 1
             x = 0
-            while y <= a:
-                if list3[x][6] >= list3[y][6]:
+            while y <= alpha:
+                print('c')
+                print('x',x)
+                print('y',x)
+                if list3[x][5] <= list3[y][5]:
                     y = y+1
-                elif list3[x][6] < list3[y][6]:
+                elif list3[x][5] > list3[y][5]:
                     x = y
                     y = y + 1
                 else:
@@ -81,29 +97,33 @@ def sort_rest(word_number):
             list3.pop(x)
             print('list4', list4)
             print('list3', list3)
-            b = b - 1
-            if b == 1:
+            base = base - 1
+            alpha = alpha - 1
+            if base == 1:
                 list4.append(list3[0])
                 list3 = []
                 base = 0
                 alpha = 0
-        if b == 1:
+        if base == 1:
             list4.append(list3[0])
             list3 = []
             base = 0
             alpha = 0
     for i in list4:
         letterwords[word_number[0]][2].remove(i)
+        print('i',i)
+        print(letterwords[word_number[0]][2])
     for i in list4:
         letterwords[word_number[0]][2].insert(ticker3, i)
         ticker3 = ticker3 + 1
-    #letterwords[word_number[0]][2] = [letterwords[word_number[0]][2][:ticker2],list4[:],letterwords[word_number[0]][2][(ticker3+ticker):]]
-    print(letterwords[word_number[0]][2])
+        print(letterwords[word_number[0]][2])
 
 def sort(word_number):
     global letterwords
+    global a
     global b
     global x
+    global y
     value = word_number[0]
     list2 = []
     b = len(letterwords[word_number[0]][2])
@@ -113,18 +133,20 @@ def sort(word_number):
             y = 1
             x = 0
             while y <= a:
-                if letterwords[word_number[0]][2][x][3]>= letterwords[word_number[0]][2][y][3]:
+                if letterwords[word_number[0]][2][x][3] <= letterwords[word_number[0]][2][y][3]:
                     y = y + 1
-                elif letterwords[word_number[0]][2][x][3] < letterwords[word_number[0]][2][y][3]:
+                elif letterwords[word_number[0]][2][x][3] > letterwords[word_number[0]][2][y][3]:
                     x = y
                     y = y + 1
                 else:
                     print('error')
                     return False
-            list2.append(letterwords[word_number[0]][2][x-1])
-            letterwords[word_number[0]][2].pop(x-1)
+            list2.append(letterwords[word_number[0]][2][x])
+            letterwords[word_number[0]][2].pop(x)
+            print('ho')
             print(list2)
             b = b - 1
+            a = a - 1
             if b == 1:
                 list2.append(letterwords[word_number[0]][2][0])
                 letterwords[word_number[0]][2] = []
@@ -139,16 +161,18 @@ def sort(word_number):
         
 
     letterwords[word_number[0]][2] = list2
-    #sort_rest(word_number)
+    sort_rest(word_number)
 
 def word_print():
     for i in order:
         print(letterwords[i][2])
 
 def word_insertion(word,word_number):
+    global yesno
     global letterwords
     global yesno
     global list1
+    yesno = 0
     y = 0
     x = len(word)
     while x > y:
@@ -161,12 +185,15 @@ def word_insertion(word,word_number):
         else:
             yesno = yesno
     if yesno == 1:
-        pass
+        print('yesno', yesno)
     else:
-        letterwords[word_number[0]][2].append(list1)
-        list1 = []
         
-    sort(word_number)
+        if len(list1) > 2:
+            letterwords[word_number[0]][2].append(list1)
+            sort(word_number)
+        elif len(list1) < 2:
+            letterwords[word_number[0]][2].insert(1,list1)
+        list1 = []
 
 def termination():
     for i in order:
