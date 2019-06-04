@@ -16,6 +16,7 @@ clearlist = []
 order = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
 order2 = [3,4]
 list1 = []
+previous = 0
 
 letterwordsa = []
 letterwordsb = []
@@ -45,6 +46,74 @@ letterwordsy = []
 letterwordsz = []
 
 letterwords = [['a',0,letterwordsa],['b',0,letterwordsb],['c',0,letterwordsc],['d',0,letterwordsd],['e',0,letterwordse],['f',0,letterwordsf],['g',0,letterwordsg],['h',0,letterwordsh],['i',0,letterwordsi],['j',0,letterwordsj],['k',0,letterwordsk],['l',0,letterwordsl],['m',0,letterwordsm],['n',0,letterwordsn],['o',0,letterwordso],['p',0,letterwordsp],['q',0,letterwordsq],['r',0,letterwordsr],['s',0,letterwordss],['t',0,letterwordst],['u',0,letterwordsu],['v',0,letterwordsv],['w',0,letterwordsw],['x',0,letterwordsy],['y',0,letterwordsy],['z',0,letterwordsz]]
+
+def shift():
+    global list5
+    global list6
+    global arbitrary
+    global arbitrary2
+    global arbitrary3
+    arbitrary = 0
+    arbitrary2 = 0
+    arbitrary3 = 0
+    value = len(word_number)
+    print('value',value)
+    list5 = []
+    list6 = []
+    print(word_number)
+    for i in letterwords[word_number[0]][2]:
+        print(i)
+        while value > arbitrary:
+            if word_number[arbitrary2] == i[(arbitrary2+1)*2]:
+                print(word_number[arbitrary2])
+                print(i[(arbitrary2+1)*2])
+                arbitrary3 = arbitrary3 + 1
+                print(arbitrary3)
+            arbitrary = arbitrary + 1
+            arbitrary2 = arbitrary2 + 1
+        if arbitrary3 == value:
+            list5.append(i)
+        arbitrary = 0
+        arbitrary2 = 0
+        arbitrary3 = 0
+    print(list5)
+    #Controller().release(Key.shift)
+    #Controller().press('a')
+    for i in list5:
+        print(list5)
+        a = len(list5)
+        print(a)
+        x = 0
+        y = 1
+        while y < a:
+            if list5[x][0] >= list5[y][0]:
+                y = y + 1
+            elif list5[x][0] < list5[y][0]:
+                x = y
+                y = y + 1
+            else:
+                print('error')
+                return False
+            list6.append(list5[x])
+            list5.pop(x)
+            a = a - 1
+    list6.append(list5[0])
+    #list5.pop(x)
+    list5 = []
+    print('list6',list6)
+    Controller().release(Key.shift)
+    value2 = (len(list6[0])-1)/2
+    value3 = 0
+    while value3 < value2:
+        value3 = value3 + 1
+        print('value2',value2)
+        print('value3', value3)
+        print('value', value)
+        print('while')
+        if value3 > value:
+            Controller().press(keyboard.KeyCode.from_char(list6[0][value3*2-1]))
+            print(list6[0][value3*2])
+        
 
 def sort_rest(word_number):
     global ticker
@@ -171,6 +240,7 @@ def word_print():
         print(letterwords[i][2])
 
 def word_insertion(word,word_number):
+    print('word_insertion')
     global yesno
     global letterwords
     global yesno
@@ -178,14 +248,15 @@ def word_insertion(word,word_number):
     yesno = 0
     y = 0
     x = len(word)
-    list1.append(0)
+    list1.append(1)
     while x > y:
         list1.append(word[y])
         list1.append(word_number[y])
         y = y + 1
     for i in letterwords[word_number[0]][2]:
-        if list1 == i:
+        if list1[1:] == i[1:]:
             yesno = yesno + 1
+            i[0] = i[0] + 1
         else:
             yesno = yesno
     if yesno == 1:
@@ -220,13 +291,22 @@ def word_clear():
 
 def letter(key):
     global variable
+    global previous
     variable = 0
     for i in letters:
         if key == keyboard.KeyCode.from_char(i):
             print(i)
             word_appender(i,variable)
+            previous = 1
         if key == Key.space:
             word_clear()
+        if key == Key.shift:
+            if len(word) > 0:
+                if previous != 0:
+                    shift()
+                    previous = 0
+            else:
+                print('no letters to autocomplete')
         variable = variable + 1
 
 def on_press(key): #everything that happens after a key was pressed
