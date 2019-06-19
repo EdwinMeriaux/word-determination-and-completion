@@ -1,3 +1,6 @@
+#errors:
+#in the there those them them list the is always chosen since it is sorter I think
+
 #these files are the necessary imports
 import pynput
 import random
@@ -289,6 +292,9 @@ def word_clear():
         word = []
         word_number = []
 
+def noshift():
+    print('under current circumstances shift cannot be used to autofil')
+
 def letter(key):
     global variable
     global previous
@@ -303,10 +309,15 @@ def letter(key):
         if key == Key.shift:
             if len(word) > 0:
                 if previous != 0:
-                    shift()
+                    print(previous)
+                    if letterwords[previous][1]>0:
+                        shift()
+                    else:
+                        noshift()
                     previous = 0
             else:
                 print('no letters to autocomplete')
+                noshift()
         variable = variable + 1
 
 def on_press(key): #everything that happens after a key was pressed
