@@ -310,7 +310,7 @@ def letter(key):
             if len(word) > 0:
                 if previous != 0:
                     print(previous)
-                    if letterwords[previous][1]>0:
+                    if (letterwords[previous][1] > 0 and len(word) == 1) or (len(word) > 1 and len(letterwords[word_number[0]][2]) > 0):
                         shift()
                     else:
                         noshift()
